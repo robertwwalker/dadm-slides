@@ -424,11 +424,13 @@ yields:
 
 $Pr(User | +) = \frac{0.099 [0.99*0.1]}{0.144[0.99*0.1 + 0.05*0.9]} = 0.6875$
 
+why?  10% of users with 99% accuracy given users should yield 0.099 [0.99 times 0.1] positive and 0.001 [0.1 times 0.01] negative.  Similar, 90% non-users with 95% accuracy yields negative with probability 0.855 [0.95 times 0.9] and positive for the rest [0.05 times 0.9].
+
 
 ---
 # Dichotomization is Prone to Error
 
-As Jaynes suggests, probability is the extension of Aristotellian logic, but we are trying to go back to binary.
+As Jaynes suggests, probability is the extension of Aristotellian logic, but we are often trying to go back to binary in making decisions.  Characterizing both forms of decision error, whether called false positives and false negatives, sensitivity and specificity, or Type-I and Type-II errors becomes of paramount importance.
 
 ---
 # A Bit of Decision Theory

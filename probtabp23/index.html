@@ -129,7 +129,9 @@ How often does something happen?
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/tgC-vZp07YM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen&gt;&lt;/iframe&gt;
 
 [Annie](https://youtu.be/tgC-vZp07YM)
+
 [Straight to Watch](https://www.youtube.com/watch?v=tgC-vZp07YM)
+
 ---
 class: inverse
 
@@ -304,7 +306,7 @@ countdown_fullscreen(
 )
 ```
 
-<div class="countdown countdown-fullscreen" id="timer_08a7c3b5" data-update-every="1" tabindex="0" style="top:0;right:0;bottom:0;left:0;margin:5%;padding:0;font-size:8em;">
+<div class="countdown countdown-fullscreen" id="timer_9963e42f" data-update-every="1" tabindex="0" style="top:0;right:0;bottom:0;left:0;margin:5%;padding:0;font-size:8em;">
 <div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -571,11 +573,13 @@ yields:
 
 `\(Pr(User | +) = \frac{0.099 [0.99*0.1]}{0.144[0.99*0.1 + 0.05*0.9]} = 0.6875\)`
 
+why?  10% of users with 99% accuracy given users should yield 0.099 [0.99 times 0.1] positive and 0.001 [0.1 times 0.01] negative.  Similar, 90% non-users with 95% accuracy yields negative with probability 0.855 [0.95 times 0.9] and positive for the rest [0.05 times 0.9].
+
 
 ---
 # Dichotomization is Prone to Error
 
-As Jaynes suggests, probability is the extension of Aristotellian logic, but we are trying to go back to binary.
+As Jaynes suggests, probability is the extension of Aristotellian logic, but we are often trying to go back to binary in making decisions.  Characterizing both forms of decision error, whether called false positives and false negatives, sensitivity and specificity, or Type-I and Type-II errors becomes of paramount importance.
 
 ---
 # A Bit of Decision Theory
