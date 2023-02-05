@@ -3,7 +3,7 @@ title: "Tidy, Probability and Tables"
 subtitle: "The Core of Statistical Thinking"
 author: "Robert W. Walker"
 institute: "Atkinson Graduate School of Management"
-date: "2022/01/31"
+date: "2023/01/31"
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css
