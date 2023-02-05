@@ -532,8 +532,6 @@ where $${n \choose k} = \frac{n!}{(n-k)!}$$
 
 *Informal surveys suggest that 15% of Essex shopkeepers will not accept Scottish pounds.  There are approximately 200 shops in the general High Street square.*
 
-
-
 1. Draw a plot of the distribution and the cumulative distribution of shopkeepers that do not accept Scottish pounds.
 
 ```{r}
@@ -673,7 +671,7 @@ $$Pr(y=k) = {k+r-1 \choose r-1}(1-p)^{k}p^{r}$$
 
 ## Needed Sales
 
-I need to make 5 sales to close for the day.  How many customers will I have to get those five sales when each customer purchases with probability 0.2.
+I need to make 5 sales to close for the day.  How many potential customers will I have to have to get those five sales when each customer purchases with probability 0.2.
 
 ```{r}
 library(patchwork)
