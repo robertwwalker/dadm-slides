@@ -488,7 +488,7 @@ ggplot(UCBTab) +aes(x = Gender, fill = Admit) + geom_bar(color="darkgreen", posi
 
 ## A Key Visual
 
-```{r Yellow, message=FALSE, warning=FALSE, fig.width=9, fig.height=5, fig.align='center'}
+```{r Yellow, message=FALSE, warning=FALSE, fig.width=9, fig.height=5, fig.align='center', dev="jpeg"}
 UCB.Pi <- bind_rows(UCBTF.Pi, UCBTM.Pi)
 UCB.Pi %>% ggplot(., aes(x=Gender, y=Pi.Admit, fill=Gender)) + geom_violin() + geom_label(aes(x=1.5, y=0.375), label="Too small to be male \n Too large to be female?", size=14, fill="black", color="white", inherit.aes = FALSE) + guides(size="none") + labs(x="") + scale_fill_viridis_d()
 ```
@@ -569,5 +569,3 @@ $$SE(\hat{p}_{M} - \hat{p}_{F}) =  \sqrt{ \underbrace{\frac{\hat{p}_{M}(1-\hat{p
 ## The chi-square and the test of independence
 
 The sum of $k$ squared standard normal (z or Normal(0,1)) variates has a $\chi^2$ distribution with $k$ degrees of freedom.  Two sample tests of proportions can be reported using the chi-square metric as well.  $R$'s `prop.test` does this by default.
-
-
