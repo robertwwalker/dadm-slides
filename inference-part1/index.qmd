@@ -516,7 +516,7 @@ anim_save(SaveAnim, renderer = gifski_renderer(height=500, width=1000), filename
 
 ::::
 
-## Can We Measure the Difference? {.smaller}
+## Can We Measure the Difference?
 
 :::: {.columns}
 
@@ -545,7 +545,7 @@ ggplot(UCB.Diff) + aes(x=Diff) + geom_density() + labs(title="Difference in Prob
 
 ::::
 
-## Or Use the Normal Approximation {.smaller}
+## Or Use the Normal Approximation
 
 $$[\hat{p}_{M} - \hat{p}_{F}] \pm z*\sqrt{ \underbrace{\frac{\hat{p}_{M}(1-\hat{p}_{M})}{n_{M}}}_{Males} + \underbrace{\frac{\hat{p}_{F}(1-\hat{p}_{F})}{n_{F}}}_{Females}}$$
 
