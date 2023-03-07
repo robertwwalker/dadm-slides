@@ -750,6 +750,8 @@ head(predict(Model.EPL, newdata=data.frame(Wage.Bill.milGBP=seq(0,200,10)), inte
    c. Predictions have `t` averages and `normal` intervals.  
    d. **All founded upon the sum of squared errors being $\chi^2$.**  
 3. This core idea of **explaining variance** or unpacking a black box is the core question to virtually all *machine learning* and modelling.  
-4. The capital asset pricing model.
+4. [The capital asset pricing model.](https://shinytick-geiwez4tia-uc.a.run.app)
+
+
 
    
