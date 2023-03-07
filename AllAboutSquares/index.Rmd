@@ -143,6 +143,27 @@ source('https://github.com/robertwwalker/DADMStuff/raw/master/PlotlyReg.R')
 
 
 ---
+# Pivots Gather/Spread and tidy data
+
+Radiant can be picky about data structures.  `ggplot` is built around the idea of tidy data from Week 2.  How do we make data tidy?
+
+At the command line, it is `pivot_wider` and `pivot_longer` while radiant uses the [at some point to be obsolete `spread`/`gather`]
+
+---
+# A Bit on Covariance and Correlation
+
+Covariance is defined as:
+$$\sum_{i} (x_{i} - \overline{x})(y_{i} - \overline{y})$$
+
+Where $\overline{x}$ and $\overline{y}$ are the sample means of x and y.  The items in parentheses are deviations from the mean; covariance is the product of those deviations from the mean.  The metric of covariance is the product of the metric of $x$ and $y$; often something for which no baseline exists.  For this reason, we use a normalized form of covariance known as correlation, often just $\rho$.
+
+$$\rho_{xy} = \sum_{i} \frac{(x_{i} - \overline{x})(y_{i} - \overline{y})}{s_{x}s_{y}}$$
+
+Correlation is a **normed** measure; it varies between -1 and 1.
+
+
+
+---
 class: inverse
 
 ## An Oregon Gender Gap
