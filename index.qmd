@@ -1,0 +1,42 @@
+---
+title: "Pivoting: Wide and Long"
+bibliography: "bibliography.bib"
+nocite: |
+     @*
+author: "Robert W. Walker"
+format: 
+   html:
+     self-contained: true
+     self-contained-math: true
+     code-fold: true
+     code-copy: hover
+     code-block-border-left: true
+     df-print: paged
+     embed-resources: true
+     fig-format: retina
+     footnotes-hover: true
+     html-math-method: katex
+     mainfont: Playfair Display
+     toc: true
+     toc-title: Navigation
+     theme: simplex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE, message=FALSE, warning=FALSE)
+```
+
+These are the slides for DADM -- Data Analysis, Modelling, and Decision-Making -- in the Atkinson Graduate School of Management.
+
+```{r}
+library(DT)
+dir()
+```
+
+
+# References
+
+```{r}
+knitr::write_bib(names(sessionInfo()$otherPkgs), file="bibliography.bib")
+```
+

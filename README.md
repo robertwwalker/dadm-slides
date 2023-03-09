@@ -2,6 +2,7 @@
 
 This houses the collections of slides used in Data Analysis, Modelling, and Decision-Making in the Atkinson Graduate School of Management at Willamette University.
 
+- [All About Squares](https://robertwwalker.github.io/dadm-slides/AllAboutSquares/index.html)
 - [Discrete Distributions](https://robertwwalker.github.io/dadm-slides/discrete-dists/index.html)
 - [Importing Data](https://robertwwalker.github.io/dadm-slides/ImportingData/index.html)
 - [Inference: Discrete Distributions](https://robertwwalker.github.io/dadm-slides/inference-part1/index.html)
@@ -10,3 +11,4 @@ This houses the collections of slides used in Data Analysis, Modelling, and Deci
 - [Probability Distributions](https://robertwwalker.github.io/dadm-slides/probdist23/index.html)
 - [Probability and Tables](https://robertwwalker.github.io/dadm-slides/probtabp23/index.html)
 - [tidy data](https://robertwwalker.github.io/dadm-slides/tidy-p23q/index.html)
+- [flipbooking with ggplot](https://robertwwalker.github.io/dadm-slides/flipbookgg/index.html)
