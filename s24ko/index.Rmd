@@ -346,11 +346,9 @@ Bonds %>%
 
 R works by packages that add functionality.  The process is two parts: install a package [install.packages("package")] and then use it [library(package)].
 
-R can handle installation for you.  In general, unless you know what it means, avoid compiling from source; binary packages are preferred.
+R can handle installation for you.  In general, unless you know what it means, avoid compiling from source; binary packages are preferred.  If that sounds unintelligible, do not fret.
 
-```{r eval=FALSE, tidy=FALSE}
-install.packages(c("tidyverse","skimr","magrittr","hrbrthemes","ggthemes"))
-```
+[The radiant install page](https://radiant-rstats.github.io/docs/install.html) should provide a useful guide.
 
 For your homework assignment, you will need to acquire R, RStudio, and a package called Radiant.
 
@@ -384,10 +382,8 @@ The [RStudio IDE](https://www.rstudio.com/products/rstudio/), is highly recommen
 4. R with Markdown make automated report writing and other literate uses of data, graphics, and text easy to do.  
 --
 
-5. The assignment for this week involves practicing this and getting acquainted with R via *swirl*.  
---
+5. The assignment for this week involves setting up our software infrastructure for the term.  
 
-6. As a first task, we need to get data from Excel to R.  There is a worked example in `Resources > R Documents > Import Data from Excel into R` to work with.
 
 ---
 # A Postscript
