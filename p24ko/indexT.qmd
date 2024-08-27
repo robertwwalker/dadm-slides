@@ -1,0 +1,373 @@
+---
+title: "Data Analysis, Modeling, and Decision-Making"
+subtitle: "Lecture 1: Welcome and Introduction"
+author: "Robert W. Walker"
+format: 
+   revealjs:
+     multiplex: true
+     preview-links: true
+     theme: [custom.scss]
+     scrollable: true
+     logo: AGSMlogo.jpeg
+     footer: "DADM: Week 1 (28 Aug 2024)"
+     chalkboard: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: convex
+     code-fold: true
+     code-tools: true
+---
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+```{r setup, include=FALSE}
+library(fontawesome)
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE, comment=NA, prompt=FALSE, fig.height=6, fig.width=6.5, fig.retina = 3, dev = 'svg', eval=TRUE)
+library(tidyverse)
+library(DT)
+theme_set(hrbrthemes::theme_ipsum_rc())
+options(
+  digits = 3,
+  width = 75,
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis",
+  ggplot2.discrete.colour = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442"),
+  ggplot2.discrete.fill = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442")
+)
+```
+
+
+<iframe src="https://prezi.com/p/embed/E72vUeF6v22VkSrCfYpd/" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay; fullscreen" height="600" width="800"></iframe>
+
+[The Link](https://prezi.com/view/E72vUeF6v22VkSrCfYpd/)
+
+## A syllabus
+
+- Let's walk through that.
+- On Canvas, Files > Syllabus
+
+# A Bit of First Day Work
+
+## Some Quick R and Excel Tools
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+- Everything is built around R and RStudio.
+- RMarkdown is my tool of choice.  
+- In fact, these slides are markdown rendered as reveal.js  
+
+:::
+
+::: {.column width="70%"}
+
+![RMD](./images/RMD.png)
+
+:::
+
+::::
+
+## Some Example Data
+
+The data are Bond.Funds.  We have an ID, Type, Assets, Fees [Yes or No], Expense Ratio, Returns in 2009, 3 year, 5 year, and a Risk classification.  A [link to the data in Excel format NB auto-downloads.](https://github.com/robertwwalker/DADMStuff/raw/master/BondFunds.xlsx).
+
+```{r, eval=FALSE, tidy=TRUE}
+load(url("https://github.com/robertwwalker/DADMStuff/raw/master/R-Workspace-Lecture-1.RData"))
+Bonds
+```
+
+## The Data
+
+```{r, echo=FALSE}
+load(url("https://github.com/robertwwalker/DADMStuff/raw/master/R-Workspace-Lecture-1.RData"))
+Bonds %>% knitr::kable()
+```
+
+## My Current Thinking
+
+An analogy: $R$ is like learning a foreign language.  It has the essential elements of   
+
+- syntax 
+- structure  
+- scoping  
+
+- Learning how R thinks and communicates is crucial and that is largely an interaction between you and $R$.
+
+- **$R$ is a language for data.**
+
+- But to save you from having to learn that alongside everything else, we will make use of a graphical user interface that gets us a great deal of power.
+
+## A Preview
+
+![V1](./images/Screenshot 2024-08-27 at 3.27.44 PM.png)
+![V2](./images/Screenshot 2024-08-27 at 3.27.15 PM.png)
+
+
+## Some Essential Excel
+
+- Formulae  
+- Absolute and relative references  
+- Pivot tables   
+
+It has some nice features.  
+
+It fails the simple test of manipulability of the underlying data.
+
+## Formulae
+
+Pre-programmed functions that take input ranges of cells and produce particular outputs.
+
+A [link to some data](https://github.com/robertwwalker/DADMStuff/raw/master/BondFunds.csv).
+
+e.g. set cell `J5` to be:
+
+```
+=AVERAGE(C2:C21)
+```
+
+This averages the range between C2 and C21 [Assets].
+
+## A Visual
+
+![Image](./images/Screenshot 2024-08-27 at 3.37.10 PM.png)
+
+
+## Adjusting Formulae
+
+When we copy this left or right, up or down, the numbers and/or letters adjust.  
+
+Copy that formula and paste it into K5.  Then L5.
+
+## A Visual
+
+![Image](./images/Screenshot 2024-08-27 at 3.44.49 PM.png)
+
+## A Bit More Complex
+
+**Let's try to make column M into `=C2 - J5` , then C3-J5, etc. all the way down to C21.**  
+
+The 5 won't stop changing.
+
+## Cell Referencing
+
+We may not want that.  Suppose that I want to create a column showing the difference of assets and average assets.  In essence, we have *rescaled* assets such that 0 is the average and we are measuring above or below that average [and by how much].  The `$` holds an index constant [F4].  We have two.  In our case, we can hold both the rows and the column constant for the average.
+
+
+Because we are only copying down, the `$5` would have sufficed.
+
+```
+=C2 - $J$5
+=C2 - J$5
+```
+
+Then copy the formula down to L21.  Notice the C changes [no $] but the J doesn't. **The $ enables absolute cell referencing.** 
+
+As expected.  Average assets over the first 20 is 1894.7; the first is 5373.4 above the average for this set.
+
+## A Visual
+
+![Image](./images/Screenshot 2024-08-27 at 3.41.21 PM.png)
+
+
+## Formulae and Recursion
+
+This can become quite involved; spreadsheets are programming tools.  **Their underlying problem is that they do not enforce rules or discipline along the way.**
+
+The key to our formulae are one or more inputs, a series of transformation and operations, and one or more outputs defined in a precise fashion.  As an aside, the father of recursion as a core principle in computer science is teaching at Willamette this term -- Eric S. Roberts.  Functions link inputs and outputs. 
+
+**They are models.**
+
+
+# Pivot Tables
+
+
+## Pivot Tables
+
+Are really cool; they are a very simple and quick way to slice and data and to gain useful comparative and/or summary insight.
+
+They have the added virtue of being drag and drop.
+
+## Example
+
+![](./images/Screenshot 2024-08-27 at 3.48.39 PM.png)
+
+All of the action comes in the calculations shown in the pivot table.  Unfortunately, it is extraordinarily limited.  
+
++ What if I want the median?  
++ How about the first and third quartiles?
+
+# Cautionary Tale
+
+[Excel has probably killed people...  recently](https://www.bbc.com/news/technology-54423988)
+
+## R-escue
+
+This will become easy with the group_by command in R's tidyverse.
+
+```{r}
+Bonds %>% group_by(Type) %>% summarise(Avg.Assets = mean(Assets, na.rm=TRUE),
+                                       Med.Assets = median(Assets, na.rm=TRUE),
+                                       `Assets 25th` = quantile(Assets, probs = c(0.25), na.rm = TRUE),
+                                       `Assets 75th` = quantile(Assets, probs = c(0.75), na.rm = TRUE)) %>% kableExtra::kable()
+```
+
+## Visual
+
+![](./images/Screenshot 2024-08-27 at 3.55.49 PM.png)
+
+## Median
+
+![](./images/Screenshot 2024-08-27 at 3.56.04 PM.png)
+
+## And it scales
+
+```{r}
+Bonds %>% group_by(Type,Risk) %>% summarise(Avg.Assets = mean(Assets, na.rm=TRUE),
+                                       Med.Assets = median(Assets, na.rm=TRUE),
+                                       `Assets 25th` = quantile(Assets, probs = c(0.25), na.rm = TRUE),
+                                       `Assets 75th` = quantile(Assets, probs = c(0.75), na.rm = TRUE)) %>% kableExtra::kable()
+```
+
+## Visual
+
+![](./images/Screenshot 2024-08-27 at 3.52.25 PM.png)
+
+## `skim()`
+
+```{r, echo=FALSE}
+# install.packages("skimr")
+library(skimr)
+Bonds %>% group_by(Type,Risk) %>% skim(Assets)
+```
+
+
+## First Graphs
+
+```{r Fig1A, eval=TRUE, echo=FALSE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+Bonds %>% ggplot(., aes(x=`Return 2009`, fill=Type)) + 
+  geom_density(alpha = 0.3) + 
+  facet_wrap(vars(Risk)) + 
+  labs(title="2009 Returns by Risk and Type", x="Returns in 2009")
+```
+
+
+# We Can Graph Exactly That
+
+
+```{r Box1A, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+Bonds %>% ggplot(., aes(y=`Return 2009`, x=Type, color=Type)) + 
+  geom_boxplot(alpha = 0.3) + 
+  guides(color="none") + 
+  scale_color_viridis_d() + 
+  facet_wrap(vars(Risk)) + 
+  labs(title="2009 Returns by Risk and Type", y="Returns in 2009") +   
+  theme(axis.text.x = element_text(angle = 45, size=12))
+```
+
+
+```{r RTC1, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+Bonds %>% 
+  group_by(Type,Risk) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(., aes(x=Type, y=Risk, fill=Count)) + 
+  geom_tile() + 
+  labs(title="Funds by Risk and Type", y="Risk", x="Type")
+```
+
+
+# R Makes Data Understanding Easier
+
+
+## Installing packages
+
+R works by packages that add functionality.  The process is two parts: install a package [install.packages("package")] and then use it [library(package)].
+
+R can handle installation for you.  In general, unless you know what it means, avoid compiling from source; binary packages are preferred.  If that sounds unintelligible, do not fret.
+
+[The radiant install page](https://radiant-rstats.github.io/docs/install.html) should provide a useful guide.
+
+For your homework assignment, you will need to acquire R, RStudio, and a package called Radiant.
+
+```{r eval=FALSE, tidy=FALSE}
+install.packages(c("radiant"))
+```
+
+For a brief foray into R Graphics,
+
+```{r eval=FALSE, tidy=FALSE}
+install.packages(c("esquisse"))
+```
+
+
+The [RStudio IDE](https://www.rstudio.com/products/rstudio/), is highly recommended but you do not have to.  The command line or the base GUI work but you will have to type to render RMarkdown and I use it alot.
+
+## Takeaways
+
+1. The biggest barrier to learning from data is not having a useful pipeline.  
+2. Data should be tidy and easy to analyse.  We spend time analysing rather than cleaning.  
+3. R makes getting data in and out easy.  It links with tons of things.  
+4. R with Markdown make automated report writing and other literate uses of data, graphics, and text easy to do.  
+5. The assignment for this week involves setting up our software infrastructure for the term.  
+
+
+## A Postscript
+
++ Interacting with the course text.  Note the tab on the left of the course website that links to the course text github.  It leads to this:
+
+![Screenshot](images/CTGH.png)
+
+## Let's Recreate a Textbook Plot
+
+Let's navigate to chapter 2: summarizing data.  Then Figures.  This is `loan_int_rate_dot_plot`.  The code is the .R file.
+
+![Screenshot](images/DPlot.png)
+
+## Code for that
+
+```{r, echo=TRUE, eval=FALSE}
+library(openintro)
+d <- loan50$interest_rate
+xlim <- c(0.9 * min(d), 1.05 * max(d))
+round.to <- 1
+binned <- round.to * round(d / round.to)
+tab <- table(binned)
+M <- mean(d)
+cex    <- 1
+plot(0, type = "n", xlab = "Interest Rate, Rounded to Nearest Percent", ylab = "", axes = FALSE, xlim = xlim, ylim = c(-1, 1.5 * max(tab)))
+for (i in 1:length(tab)) {
+  points(rep(as.numeric(names(tab[i])), tab[i]),
+         1.5 * (1:tab[i]) - 0.4,
+         pch = 19,
+         col = COL[1],
+         cex = 2 * cex)
+}
+abline(h = 0)
+AxisInPercent(1, pretty(c(0, d)))
+polygon(M + c(-1, 1, 0) * 1, c(-1.2, -1.2, -0.1), border = COL[4], col = COL[4])
+```
+
+## It Is [Like Everything] Reproducible
+
+```{r, echo=FALSE, eval=TRUE}
+library(openintro)
+d <- loan50$interest_rate
+xlim <- c(0.9 * min(d), 1.05 * max(d))
+round.to <- 1
+binned <- round.to * round(d / round.to)
+tab <- table(binned)
+M <- mean(d)
+cex    <- 1
+plot(0, type = "n", xlab = "Interest Rate, Rounded to Nearest Percent", ylab = "", axes = FALSE, xlim = xlim, ylim = c(-1, 1.5 * max(tab)))
+for (i in 1:length(tab)) {
+  points(rep(as.numeric(names(tab[i])), tab[i]),
+         1.5 * (1:tab[i]) - 0.4,
+         pch = 19,
+         col = COL[1],
+         cex = 2 * cex)
+}
+abline(h = 0)
+AxisInPercent(1, pretty(c(0, d)))
+polygon(M + c(-1, 1, 0) * 1, c(-1.2, -1.2, -0.1), border = COL[4], col = COL[4])
+```
