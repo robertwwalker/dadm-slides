@@ -184,6 +184,7 @@ DT::datatable(FastFood)
 # Radiant's Data {background-image="./img/data.png"}
 
 - The clipboard and type consistency
+- Let's try FastFood from Excel using the clipboard.
 
 # Some Key Book Things
 
