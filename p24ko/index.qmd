@@ -39,7 +39,6 @@ options(
 
 
 <iframe src="https://prezi.com/p/embed/E72vUeF6v22VkSrCfYpd/" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay; fullscreen" height="600" width="800"></iframe>
-
 [The Link](https://prezi.com/view/E72vUeF6v22VkSrCfYpd/)
 
 ## A syllabus
@@ -242,6 +241,9 @@ library(skimr)
 Bonds %>% group_by(Type,Risk) %>% skim(Assets)
 ```
 
+## Another bit of radiant
+
+![](./images/data-explore-screenshot.png)
 
 ## First Graphs
 
