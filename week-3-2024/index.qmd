@@ -1,0 +1,62 @@
+---
+title: "Concluding Numerical Summary and Visualization"
+subtitle: "OIS Chapters 1 and 2, Grammar of Graphics"  
+author: "Robert W. Walker"
+date: '`r Sys.Date()`'
+format: 
+   revealjs:
+     theme: [custom.scss]
+     scrollable: true
+     logo: AGSMlogo.jpeg
+     footer: "DADM-Fall 2024"
+     self-contained: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: zoom
+     multiplex: true
+     preview-links: true
+     code-fold: true
+highlight-style: espresso
+---
+
+```{r setup, include=FALSE}
+library(tidyverse) 
+library(dplyr)
+knitr::opts_chunk$set(fig.retina=3, fig.height=6, fig.width=9, echo=TRUE, eval=TRUE)
+```
+
+# Overview
+
+- AMA
+- A slide on tables and getting up and running.
+- Data Visualization
+- Introducing `esquisse`
+- The Economist
+
+# AMA
+
+# Getting Up and Running {background-image="./img/bg2.png" background-opacity="0.5"}
+
+1. The state file is on Canvas.  Download it.
+2. Start radiant.
+3. Load the radiant state file.
+
+# Summaries of Categorical Data {background-image="./img/bg.png" background-opacity="0.5"}
+
+-   The various percentages, row, column, total.
+-   In radiant, these are Basics \> Goodness of fit or Cross-tabs
+-   Barplots, mosaics, and pie charts [egads]
+
+# To visualization
+
+- [The Link](https://robertwwalker.github.io/dadm-slides/flipbookgg/)
+- [Visualizations on the FAQ](https://robertwwalker.github.io/DADM-FAQ/)
+
+# Esquisse
+
+# The Economist
+
+- A post: [Mistakes Drawn A Few](https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368)
+- [Tidy Tuesday as a source of data](https://github.com/rfordatascience/tidytuesday)
+- The data: [data](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-04-16)
