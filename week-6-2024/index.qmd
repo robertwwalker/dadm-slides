@@ -362,7 +362,7 @@ $$f(x|\pi) = \pi^{x}(1-\pi)^{1-x}$$
 For multiple identical trials, we have the Binomial:
 
 $$f(x|n,\pi) = {n \choose k} \pi^{x}(1-\pi)^{n-x}$$
-where $${n \choose k} = \frac{n!}{(n-k)!}$$
+where $${n \choose k} = \frac{n!}{k!(n-k)!}$$
 
 
 ## The Binomial
