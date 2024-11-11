@@ -1,5 +1,5 @@
 ---
-title: "GamingDevices Diagnostics"
+title: "Hiring Diagonostics"
 subtitle: "Introducing Multiple Regression"  
 author: "Robert W. Walker"
 format: 
@@ -22,17 +22,13 @@ format:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo=TRUE, comment=NA, prompt=FALSE, fig.height=6, fig.width=6.5, fig.retina = 3, dev = 'svg', dev.args = list(bg = "white"), eval=TRUE)
 library(tidyverse)
+library(radiant)
 ```
 
-## Setup Environment
-
-```
-install.packages(c("effects","car","stargazer"))
-```
 
 ## The Problem
 
-The HR Department needs a GamingDevices diagnostic for choosing among applicants for employment.  The goal is to maximize the productivity of chosen future employees by building and deploying a model for predicting and explaining worker productivity.  We are to explain **With** as a function, potentially, of:
+The HR Department needs a `GamingDevices` diagnostic for choosing among applicants for employment.  The goal is to maximize the productivity of chosen future employees by building and deploying a model for predicting and explaining worker productivity.  We are to explain **With** as a function, potentially, of:
 
 ```{r TheData, echo=FALSE, eval=TRUE}
 GamingDevices <- structure(list(Subject = 1:36, General = c(239L, 230L, 213L, 
@@ -62,11 +58,7 @@ library(kableExtra)
 
 ## Summary Statistics
 
-
-```{r}
-library(gt)
-gt(GamingDevices)
-```
+![Explore](./img/data-explore-screenshot.png)
 
 ## What can we say?
 
@@ -76,7 +68,9 @@ gt(GamingDevices)
 With the device?
 
 ```{r}
-t.test(GamingDevices$With)
+result <- single_mean(GamingDevices, var = "With")
+summary(result)
+
 ```
 :::
 
@@ -84,7 +78,8 @@ t.test(GamingDevices$With)
 Without the device?
 
 ```{r}
-t.test(GamingDevices$Without)
+result <- single_mean(GamingDevices, var = "Without")
+summary(result)
 ```
 :::
 
@@ -111,46 +106,58 @@ Diff.G.0 <- (GamingDevices$With - GamingDevices$Without > 0)
 ggplot(GamingDevices, aes(x=Subject, ymin=Without, ymax=With)) + geom_linerange(aes(color=Diff.G.0)) + geom_point(aes(x=Subject, y=With), color="green", size=2, alpha=0.3) +  geom_point(aes(x=Subject, y=Without), color="red", size=2, alpha=0.3) + theme_minimal() + labs(color="With Bigger?")
 ```
 
+# The Important Thing is Some Good Visual
+
+## Learning from Standard Deviations
+
+![Explore](./img/data-explore-screenshot.png)
+
 ## A Paired t
 
-So the device works.  It generates 3.76 to 6.24 units per period above and beyond `Without`.  That means, at most, 3.14 periods.
+So the device works.  It generates 3.76 to 6.24 units per period above and beyond `Without`.  
 
 ```{r}
-t.test(GamingDevices$With-GamingDevices$Without)
-t.test(GamingDevices$With-GamingDevices$Without, alternative = "greater")$conf.int[[1]]
+GamingDevices$Diff <- GamingDevices$With - GamingDevices$Without
+result <- single_mean(GamingDevices, var = "Diff")
+summary(result)
+```
+
+## 95 Percent Lower Bound?
+
+12.5 additional units.
+That means, at most, 3.14 periods.
+
+```{r}
+result <- single_mean(
+  GamingDevices, 
+  var = "Diff", 
+  alternative = "greater"
+)
+summary(result)
 100/(t.test(GamingDevices$With-GamingDevices$Without, alternative = "greater")$conf.int[[1]]*8)
 ```
 
 
 ## The Workflow
 
-Let's get a feel for the data.  How about correlation?  It's pretty but not that useful.
+Let's get a feel for the data.  How about correlation?
 
+## radiant > basics > correlation
 
-```{r}
-library(corrr)
-GamingDevices %>% 
-  correlate() %>% 
-  focus(-Subject, mirror = TRUE) %>% 
-  network_plot()
-```
+**First, the question asked and answered and the p-value.**
 
-## Simple
-
-Remove `Subject` and we are good to go.
-
-```{r}
-GamingDevices %>% select(-Subject) %>% cor(.)
-```
-
-
-
-## Scatterplot Matrix
+**Nothing is uncorrelated because the probability of no correlation is zero for each pair of variables.  Everything is correlated with everything else.**
 
 Our focus will be the bottom row.
 
 ```{r, echo=FALSE}
-radiant.basics::correlation(GamingDevices)
+library(radiant)
+result <- correlation(
+  GamingDevices, 
+  vars = c("General", "Dexterity", "Without", "With")
+)
+summary(result)
+plot(result, nrobs = -1)
 ```
 
 ## Honing In [the Old World]
@@ -338,6 +345,7 @@ A single plot for HR to deploy.
 What should we do?  We could always reconstruct the analysis.  It is surprisingly easy; think about it for a second.
 
 - All we need to do is remove the outlier and recompile the document.  Reproducible analysis saves time.
+- The state file on posit.cloud and in the course directory do exactly this with a bit more detail.
 
 ## A Summary [in One Graphic]
 
