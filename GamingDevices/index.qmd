@@ -1,5 +1,5 @@
 ---
-title: "Hiring Diagnostics"
+title: "GamingDevices Diagnostics"
 subtitle: "Introducing Multiple Regression"  
 author: "Robert W. Walker"
 format: 
@@ -32,10 +32,10 @@ install.packages(c("effects","car","stargazer"))
 
 ## The Problem
 
-The HR Department needs a hiring diagnostic for choosing among applicants for employment.  The goal is to maximize the productivity of chosen future employees by building and deploying a model for predicting and explaining worker productivity.  We are to explain **With** as a function, potentially, of:
+The HR Department needs a GamingDevices diagnostic for choosing among applicants for employment.  The goal is to maximize the productivity of chosen future employees by building and deploying a model for predicting and explaining worker productivity.  We are to explain **With** as a function, potentially, of:
 
 ```{r TheData, echo=FALSE, eval=TRUE}
-Hiring <- structure(list(Subject = 1:36, General = c(239L, 230L, 213L, 
+GamingDevices <- structure(list(Subject = 1:36, General = c(239L, 230L, 213L, 
 211L, 150L, 258L, 90L, 164L, 135L, 179L, 245L, 224L, 198L, 103L, 
 226L, 137L, 194L, 101L, 120L, 269L, 122L, 209L, 194L, 119L, 247L, 
 228L, 215L, 211L, 152L, 262L, 149L, 118L, 133L, 137L, 196L, 86L
@@ -64,9 +64,8 @@ library(kableExtra)
 
 
 ```{r}
-library(car); library(tidyverse)
-library(skimr)
-skim(Hiring) %>% kable()
+library(gt)
+gt(GamingDevices)
 ```
 
 ## What can we say?
@@ -77,7 +76,7 @@ skim(Hiring) %>% kable()
 With the device?
 
 ```{r}
-t.test(Hiring$With)
+t.test(GamingDevices$With)
 ```
 :::
 
@@ -85,7 +84,7 @@ t.test(Hiring$With)
 Without the device?
 
 ```{r}
-t.test(Hiring$Without)
+t.test(GamingDevices$Without)
 ```
 :::
 
@@ -96,8 +95,8 @@ t.test(Hiring$Without)
 ## But That Is Not Really the Question
 
 ```{r}
-My.Data <- Hiring %>% select(With,Without) %>% stack()
-My.Data$Subject <- c(Hiring$Subject,Hiring$Subject)
+My.Data <- GamingDevices %>% select(With,Without) %>% stack()
+My.Data$Subject <- c(GamingDevices$Subject,GamingDevices$Subject)
 ggplot(My.Data) +
  aes(x = Subject, y = values, colour = ind) +
  geom_point(size = 3, alpha=0.75) +
@@ -108,8 +107,8 @@ ggplot(My.Data) +
 ## We Can Be Creative at The Command Line
 
 ```{r}
-Diff.G.0 <- (Hiring$With - Hiring$Without > 0)
-ggplot(Hiring, aes(x=Subject, ymin=Without, ymax=With)) + geom_linerange(aes(color=Diff.G.0)) + geom_point(aes(x=Subject, y=With), color="green", size=2, alpha=0.3) +  geom_point(aes(x=Subject, y=Without), color="red", size=2, alpha=0.3) + theme_minimal() + labs(color="With Bigger?")
+Diff.G.0 <- (GamingDevices$With - GamingDevices$Without > 0)
+ggplot(GamingDevices, aes(x=Subject, ymin=Without, ymax=With)) + geom_linerange(aes(color=Diff.G.0)) + geom_point(aes(x=Subject, y=With), color="green", size=2, alpha=0.3) +  geom_point(aes(x=Subject, y=Without), color="red", size=2, alpha=0.3) + theme_minimal() + labs(color="With Bigger?")
 ```
 
 ## A Paired t
@@ -117,9 +116,9 @@ ggplot(Hiring, aes(x=Subject, ymin=Without, ymax=With)) + geom_linerange(aes(col
 So the device works.  It generates 3.76 to 6.24 units per period above and beyond `Without`.  That means, at most, 3.14 periods.
 
 ```{r}
-t.test(Hiring$With-Hiring$Without)
-t.test(Hiring$With-Hiring$Without, alternative = "greater")$conf.int[[1]]
-100/(t.test(Hiring$With-Hiring$Without, alternative = "greater")$conf.int[[1]]*8)
+t.test(GamingDevices$With-GamingDevices$Without)
+t.test(GamingDevices$With-GamingDevices$Without, alternative = "greater")$conf.int[[1]]
+100/(t.test(GamingDevices$With-GamingDevices$Without, alternative = "greater")$conf.int[[1]]*8)
 ```
 
 
@@ -130,7 +129,7 @@ Let's get a feel for the data.  How about correlation?  It's pretty but not that
 
 ```{r}
 library(corrr)
-Hiring %>% 
+GamingDevices %>% 
   correlate() %>% 
   focus(-Subject, mirror = TRUE) %>% 
   network_plot()
@@ -141,7 +140,7 @@ Hiring %>%
 Remove `Subject` and we are good to go.
 
 ```{r}
-Hiring %>% select(-Subject) %>% cor(.)
+GamingDevices %>% select(-Subject) %>% cor(.)
 ```
 
 
@@ -151,33 +150,31 @@ Hiring %>% select(-Subject) %>% cor(.)
 Our focus will be the bottom row.
 
 ```{r, echo=FALSE}
-scatterplotMatrix(~Dexterity+General+With+Without, reg.line=lm, 
-   smooth=FALSE, spread=FALSE, span=0.5, ellipse=FALSE, levels=c(.5, .9), 
-   id.n=0, diagonal = 'density', data=Hiring)
+radiant.basics::correlation(GamingDevices)
 ```
 
 ## Honing In [the Old World]
 
 ```{r}
-summary(lm(Without~General, data=Hiring))
+summary(lm(Without~General, data=GamingDevices))
 ```
 
 ## A Picture
 
 ```{r}
-ggplot(Hiring, aes(x=General, y=Without)) + geom_point() + geom_smooth(method="lm")
+ggplot(GamingDevices, aes(x=General, y=Without)) + geom_point() + geom_smooth(method="lm")
 ```
 
 ## Honing In [the Old World, Part II]
 
 ```{r}
-summary(lm(Without~Dexterity, data=Hiring))
+summary(lm(Without~Dexterity, data=GamingDevices))
 ```
 
 ## A Picture
 
 ```{r}
-ggplot(Hiring, aes(x=Dexterity, y=Without)) + geom_point() + geom_smooth(method="lm")
+ggplot(GamingDevices, aes(x=Dexterity, y=Without)) + geom_point() + geom_smooth(method="lm")
 ```
 
 ## What Does Better?
@@ -203,8 +200,8 @@ It is a ratio of two $\chi^2$; or two appropriately scaled normals.  Since we ar
 ---
 
 ```{r}
-Model.Dex <- lm(Without ~ Dexterity, data=Hiring)
-Model.Gen <- lm(Without ~ General, data=Hiring)
+Model.Dex <- lm(Without ~ Dexterity, data=GamingDevices)
+Model.Gen <- lm(Without ~ General, data=GamingDevices)
 anova(Model.Dex)
 anova(Model.Gen)
 ```
@@ -214,9 +211,9 @@ anova(Model.Gen)
 
 ```{r Table, echo=FALSE, results='asis'}
 library(stargazer)
-Mod.DW <- lm(With~Dexterity+Without, data=Hiring)
-Mod.GW <- lm(With~General+Without, data=Hiring)
-Mod.DG <- lm(With~General+Dexterity, data=Hiring)
+Mod.DW <- lm(With~Dexterity+Without, data=GamingDevices)
+Mod.GW <- lm(With~General+Without, data=GamingDevices)
+Mod.DG <- lm(With~General+Dexterity, data=GamingDevices)
 stargazer(Mod.DG,Mod.DW,Mod.GW, type="html")
 ```
 
@@ -241,6 +238,7 @@ If residuals are not normal, then the slopes are not $t$ and ratios of variance 
 ## The Plots  [Seems Fine]
 
 ```{r Plots, echo=FALSE}
+library(car)
 par(mfrow=c(2,2))
 qqPlot(Mod.DG$residuals, dist="norm")
 qqPlot(Mod.DW$residuals, dist="norm")
@@ -313,9 +311,9 @@ It is the ratio of two boxes where each one is normalized by the degrees of free
 ## It Also Has a Marginal Interpretation
 
 ```{r}
-Mod.WithWithout <- lm(With~Without , data=Hiring)
-anova(Mod.WithWithout, lm(With~Without+General, data=Hiring))
-anova(Mod.WithWithout, lm(With~Without+Dexterity, data=Hiring))
+Mod.WithWithout <- lm(With~Without , data=GamingDevices)
+anova(Mod.WithWithout, lm(With~Without+General, data=GamingDevices))
+anova(Mod.WithWithout, lm(With~Without+Dexterity, data=GamingDevices))
 ```
 
 ## Both Add Something at the Margin
@@ -323,7 +321,7 @@ anova(Mod.WithWithout, lm(With~Without+Dexterity, data=Hiring))
 And there is still something to be learned at the margins.
 
 ```{r}
-anova(lm(With~Without+General, data=Hiring),lm(With~Without+General+Dexterity, data=Hiring))
+anova(lm(With~Without+General, data=GamingDevices),lm(With~Without+General+Dexterity, data=GamingDevices))
 ```
 
 ## Visualizing Regression
