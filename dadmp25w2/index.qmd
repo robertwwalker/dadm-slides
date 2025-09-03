@@ -9,7 +9,7 @@ format:
      theme: [custom.scss]
      scrollable: true
      logo: AGSMlogo.jpeg
-     footer: "DADM: Week 2 (2 Sep 2025)"
+     footer: "DADM-PDX: Week 2 (3 Sep 2025)"
      chalkboard: true
      html-math-method: katex
      incremental: true
