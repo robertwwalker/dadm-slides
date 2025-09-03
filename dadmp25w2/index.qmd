@@ -140,7 +140,7 @@ As expected.  Average assets over the first 20 is 1894.7; the first is 5373.4 ab
 
 This can become quite involved; spreadsheets are programming tools.  **Their underlying problem is that they do not enforce rules or discipline along the way.**
 
-The key to our formulae are one or more inputs, a series of transformation and operations, and one or more outputs defined in a precise fashion.  As an aside, the father of recursion as a core principle in computer science is teaching at Willamette this term -- Eric S. Roberts.  Functions link inputs and outputs. 
+The key to our formulae are one or more inputs, a series of transformation and operations, and one or more outputs defined in a precise fashion.   Functions link inputs and outputs. 
 
 **They are models.**
 
