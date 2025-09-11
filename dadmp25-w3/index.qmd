@@ -1,0 +1,323 @@
+---
+title: "Data and Summary"
+subtitle: "OIS Chapters 1 and 2, Woo and Broman"  
+author: "Robert W. Walker"
+date: '`r Sys.Date()`'
+format: 
+   revealjs:
+     theme: [custom.scss]
+     scrollable: true
+     logo: AGSMlogo.jpeg
+     footer: "DADM-Fall 2025"
+     self-contained: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: zoom
+     multiplex: true
+     preview-links: true
+     code-fold: true
+highlight-style: espresso
+---
+
+```{r setup, include=FALSE}
+library(tidyverse) 
+library(dplyr)
+knitr::opts_chunk$set(fig.retina=3, fig.height=6, fig.width=9, echo=TRUE, eval=TRUE)
+```
+
+# Data Summary
+
+# Anything can be Measured
+
+If you cannot measure it, it is useless because you cannot define it.
+
+## Hubbard's Applied Information Economics
+
+1. Define the decision
+2. Determine what you know now [h/t Don Rumsfeld]
+3. Measure where information value is high
+4. Make decisions and act
+5. Evaluate and revise?
+
+# Most Important: Don't Let the Perfect be the Enemy of the Good...
+
+## Woo and Broman
+
+::: columns
+::: {.column width="60%"}
+-   Be consistent
+    -   about missing data
+    -   variable names
+    -   subject identifiers
+    -   layouts in multiple files
+    -   filenames
+    -   formats for dates
+    -   phrases in notes
+    -   care with spaces in cells
+-   Choose good names \[short\]
+    -   no spaces or special characters, save underscore and maybe dash
+:::
+
+::: {.column width="40%"}
+-   Dates
+    -   as YYYY-MM-DD \[ISO 8601\]
+-   No empty cells
+-   One thing per cell
+-   Data Rectangles
+-   Create Dictionaries
+-   Colors and highlights obscure data
+-   No calculations in raw data files
+:::
+:::
+
+## Woo and Broman, Part II
+
+-   Make Backups
+-   Use Validation
+-   Save Plain Text Files
+
+## tidy data
+
+We will think and talk about data organized in a `tidy` way where rows represent **cases/units/observations** and columns represent **variables**. Many standard forms of enterprise data are not stored in this way though they could be. Accounting data come to mind where there are `data` in the column names. There are tools that we will later encounter for `pivoting` from long to wide forms where the `tidy` and long forms are synonymous.
+
+# Getting Up and Running {background-image="./img/bg2.png" background-opacity="0.5"}
+
+1. The state file is on Canvas.  Download it.
+2. Start radiant.
+3. Load the radiant state file.
+4. **I took the liberty: there's a link....**
+
+## R's Variable Types
+
+-   Factor: Qualitative labels with attached numbers. Think key-value.
+-   Character: Strings of letters and numbers demarcated by quotation marks.
+
+```         
+There is 'something' or there is "something"
+There is 'Hello World!' or there is "Hello World!"
+```
+
+-   Numeric \[integer, double\]
+-   Complex \[if you don't know what this means, worry not\]
+-   Logical
+-   Date
+
+The global environment in RStudio helps us out. There is a special combined data structure in $R$ -- the `data.frame` -- that combines data of different types organized with units defining the rows and variables defining the columns; it is implicitly `tidy`.
+
+
+## Two Examples with Excel Data \[Bonds\]
+
+When the `Environment` tab is active in the top right of the RStudio. You will see a tab called `Import Dataset`. The first thing to note is that *R* reads a number of data types \[and link to databases and things\].
+
+To import Excel data, `From Excel`\
+- We have to give it a file name. *NB Paths*.
+
+```{r}
+library(readxl)
+library(DT)
+Bonds <- read_excel("~/Downloads/Week-2.xlsx", 
+    sheet = "Bonds")
+```
+
+------------------------------------------------------------------------
+
+```{r}
+Bonds |> knitr::kable()
+```
+
+## Two Examples with Excel Data [Fast Food]
+
+```{r}
+FastFood <- read_excel("~/Downloads/Week-2.xlsx", 
+    sheet = "FastFood")
+FastFood |> knitr::kable() |> kableExtra::scroll_box()
+```
+
+. . .
+
+That's not exacly what I hoped for.\
+**There are intermediate steps to downloading it and checking the sheets that it does not do with remote files. The code automagically reflects this.**
+
+## Fast Food
+
+When the `Environment` tab is active in the top right of the RStudio. You will see a tab called `Import Dataset`. The first thing to note is that *R* reads a number of data types \[and link to databases and things\].
+
+To import Excel data, `From Excel`\
+- We have to give it a file name. *NB Paths*.\
+- We have to choose a sheet.\
+- Types of variables.\
+- Missing data values.\
+- Ranges
+
+```{r}
+{{FastFood <- read_excel("~/Downloads/Week-2.xlsx", 
+    sheet = "FastFood", na = "NA") }}
+```
+
+**This is the first of two steps to get Excel files into radiant.**
+
+## The Data {background-color="white"}
+
+```{r eval=require('DT'), tidy=FALSE, echo=FALSE}
+DT::datatable(FastFood)
+```
+
+# Radiant's Data {background-image="./img/data.png"}
+
+-   The clipboard and type consistency
+-   Let's try FastFood from Excel using the clipboard.
+
+# Some Key Book Things
+
+## Chapter 1
+
+-   Rows for cases or units, columns for variables. I will call this tidy. A rectangular matrix.
+-   Types of variables: \[1.2.2\] **it's about arithmetic**
+    -   continuous numerics \[ratio-scale and interval-level\]
+    -   discrete numerics
+    -   ordered categoricals
+    -   nominal categoricals
+-   Relationships: Positive and negative in two variables.
+-   Observational studies vs. experiments and the credibility revolution
+-   Populations and Samples
+-   simple random, stratified, cluster, and multistage sampling
+-   experiments
+
+## Chapter 2
+
+-   Means and standard deviations \[TBC\]
+-   Boxplots and percentile statistics \[TBC\]
+-   Histograms, densities, and shape
+-   Outliers, robust statistics, and shape
+-   Transformations
+
+# Summarizing Data
+
+## Center
+
+## The Mean \[Arithmetic\]
+
+The arithmetic mean of a variable, call it x, adds up all values of x and divides by the total number:
+
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+
+```{r}
+mean(FastFood$calories)
+```
+
+## Deviations about the mean sum to zero
+
+By definition, the sum of the deviations about the average must be zero.
+
+```{r}
+sum(FastFood$calories - mean(FastFood$calories))
+```
+
+## On Summaries
+
+The average is sensitive to outlying values. Think income in Seattle and the samples that include Jeff Bezos, Paul Allen, MacKenzie Scott, and Bill Gates. That is why we examine the median -- the value such that half are above and half are below; magnitude doesn't matter.
+
+## The median \[and percentiles\]
+
+The median is a percentile; it is the 50th percentile. We are often also interested in the middle 50 percent: the 25th and 75th percentiles or the first and third quartiles. In R, generically, these are quantiles.
+
+```{r}
+quantile(FastFood$protein, probs = c(0,0.25,0.5,0.75,1), na.rm=TRUE)
+```
+
+As a technical matter, the median is only unique with an odd number of observations; we approximate it with the midpoint of the middle two.
+
+## The Mode
+
+The most frequent or most common value. If it is unique, it is meaningful but it is often not even a small set of values. R doesn't calculate it. But it is visible in a density or histogram.
+
+## Variation or Spread
+
+With means, we describe the standard deviation. Note, it is singular; it implies the two sides of the center are the same -- symmetry. Because the deviations sum to zero, to measure variation, we can't use untransformed deviation from an average. We work with squares \[variance, in the squared metric\] or the square root of squares \[to maintain the original metric\].
+
+$$s=\sqrt{\frac{1}{N-1}\sum_{i=1}^{N}(x_{i}-\overline{x})^2}$$
+
+```{r}
+sd(FastFood$calories)
+```
+
+We could also work with absolute deviations. The mathematical properties are messier.
+
+## Variation in Percentiles
+
+We typically measure a range \[min to max\] or the interquartile range (IQR) -- the span of the middle 50%.
+
+```{r}
+quantile(FastFood$calories, probs = c(0,0.25,0.5,0.75,1))
+IQR(FastFood$calories)
+```
+
+Here it spans 360 calories. The total range is 2410 calories.
+
+## `View`
+
+-   the `filter` tick box \[select rows\]
+-   note we can store filtered data
+
+## `pivot`
+
+![pivot](./img/Screenshot%202024-09-04%20at%201.29.36%20AM.png)
+
+## `explore`
+
+![explore](./img/data-explore-screenshot.png)
+
+## The `transform` tab
+
+Is a key element of radiant used for transforming data. Some of the most common:
+
+-   z-scoring $z = \frac{x - \overline{x}}{s_{x}}$ which makes any variable mean 0 and standard deviation 1. In effect, z-scored variables have standard deviation as metric.
+-   binning variables
+-   non-linear functions
+-   recoding
+
+## Some Crash R
+
+Operators:
+
+-   `+`
+-   `-`
+-   `*`
+-   `/`
+-   and many others.
+-   We will also be concerned with the difference between equals as assigning and equals in math \[denoted with two equals signs in succession\].
+
+## Let's Use This \[+Store\]
+
+![TransFat](./img/TransFat.png)
+
+## Oooph on ye old BK Chicken Fries
+
+# Summaries of Categorical Data {background-image="./img/bg.png" background-opacity="0.5"}
+
+-   The various percentages, row, column, total.
+-   In radiant, these are Basics \> Goodness of fit or Cross-tabs
+-   Barplots, mosaics, and pie charts \[egads\]
+
+# Summaries of Categorical Data {background-image="./img/bg.png" background-opacity="0.5"}
+
+-   The various percentages, row, column, total.
+-   In radiant, these are Basics \> Goodness of fit or Cross-tabs
+-   Barplots, mosaics, and pie charts [egads]
+
+# To visualization
+
+- [The Link](https://robertwwalker.github.io/dadm-slides/flipbookgg/)
+- [Visualizations on the FAQ](https://robertwwalker.github.io/DADM-FAQ/)
+
+# Esquisse
+
+# The Economist
+
+- A post: [Mistakes Drawn A Few](https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368)
+- [Tidy Tuesday as a source of data](https://github.com/rfordatascience/tidytuesday)
+- The data: [data](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-04-16)
+
+
+# This sets us on defining probability....
