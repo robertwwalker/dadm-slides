@@ -69,6 +69,64 @@ Particularly for qualitative variables, radiant is quite limited.
 - [Two Quantitative Variables](https://robertwwalker.github.io/DADM-FAQ/posts/visualizing-two-quantities/)
 - [Visualizing a Mix](https://robertwwalker.github.io/DADM-FAQ/posts/visualizing-mixed-data/)
 
+## One Qualitative Variable
+
+Just filling has no x or y so a bar is the choice.
+
+![Image](img/XBar.png)
+
+## One Quantity
+
+### Options
+
+![Image](img/XOptions.png)
+
+### BoxPlot
+
+![Image](img/XBoxP.png)
+
+### Density
+
+![Image](img/XDens.png)
+
+## Two Qualitative Variables
+
+### Fill
+
+![Image](img/FillAes.png)
+
+### Stack
+
+![Image](img/FillStack.png)
+
+### Dodge
+
+![Image](img/FillDodge.png)
+
+## Two Quantities are Scatterplots
+
+![Image](img/XYScat.png)
+
+## Mixed Opens Up A Lot
+
+![Selector](img/XYSelect.png)
+
+### A Violin
+
+**A note on scaling....**
+
+![Scaling](img/XYViolS.png)
+
+![Violin](img/XYViol.png)
+
+## An Export
+
+![Export JPEG](img/export-plot.jpeg)
+
+## Two Geometries
+
+![Double](img/DoubleX.png)
+
 # Do's and Dont's
 
 [The Economist: Mistakes](https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368)
@@ -94,7 +152,7 @@ Two rules:
 
 His approach is intuitive.  If you are familiar with probability already, some of you have formal training, Appendix A sets out the key differences.
 
-Why did I ask you to read this?  He builds a basic foundation.  He derives rules.  Those rules are the same rules that we will deploy.  But he does it from more basic foundations.  Yes, he can do math. That's not the point; there is a simple representation of all of these ideas.
+Why did I ask you to read this?  He builds a basic foundation.  He derives rules.  Those rules are the same rules that we will deploy.  But he does it from more basic foundations.  Yes, he can do math. That's not the point; there is a simple representation of all of these ideas.  And only a small number of rules that we will define precisely.
 
 
 ## Where does Probability Come From?
