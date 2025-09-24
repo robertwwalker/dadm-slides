@@ -55,6 +55,22 @@ Truth        | Reject Null   |  Accept Null
 Alternative  | Correct       |  Type II error
 Null         | Type I error  | Correct
 
+## A COVID test
+
+Suppose a COVID test is 0.99 sensitive and 0.95 specific.  At the time of administration, it is thought that roughly twelve percent of the population is infected.
+
+What proportion of tests are positive?   
+
+- Two positive tests: 
+   - True positives $0.99*0.12=0.1188$ and 
+   - False positives $0.05*0.880=.044$; 
+   - sum 0.1628.  
+
+What is the probability that a person with a positive test is infected?    
+
+- Of .1628 positive tests, 0.1188 come from the infected:   
+
+$\frac{0.1188}{0.1628} = 0.7297$ 
 
 ## Two Further Issues in Probability
 
