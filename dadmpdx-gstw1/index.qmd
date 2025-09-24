@@ -1,0 +1,617 @@
+---
+title: "Evidence, Visualization, and Biases"
+subtitle: "Global Strategic Trends, part 1"  
+author: "Robert W. Walker"
+date: '`r Sys.Date()`'
+format: 
+   revealjs:
+     theme: [custom.scss]
+     scrollable: true
+     logo: AGSMlogo.jpeg
+     footer: "DADM-Fall 2025"
+     self-contained: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: zoom
+     multiplex: true
+     preview-links: true
+     code-fold: true
+highlight-style: espresso
+---
+
+```{r setup, include=FALSE}
+library(tidyverse) 
+library(dplyr)
+knitr::opts_chunk$set(fig.retina=3, fig.height=6, fig.width=9, echo=TRUE, eval=TRUE)
+```
+
+# Some Probability
+
+## Some Language
+
+*Sensitivity* refers to the ability of a test to designate an individual with a disease as positive.  *Specificity* refers to the ability of a test to designate an individual without a disease as negative.
+
+*False positives* are then the complement/opposite of specificity and *false negatives* are the complement/opposite of sensitivity.
+
+
+Truth | Positive Test   |  Negative Test
+------------- | --------|-----
+Positive  | Sensitivity  |  False Negative
+Negative  | False Positive  | Specificity
+
+Examples:
+
+- Drug testing
+- Diagnostic testing
+
+## Applied to Hypothesis Testing
+
+When we get to *hypothesis testing* in a few weeks, this comes up again with null and alternative hypotheses and the related decision.        
+
+
+Truth        | Reject Null   |  Accept Null
+-------------|---------------|-----
+Alternative  | Correct       |  Type II error
+Null         | Type I error  | Correct
+
+
+## Two Further Issues in Probability
+
+- Juries and Bayes Rule
+- Counting Rules
+
+## Counting Rules
+
+- Simple counting rules, k questions [True/False, n=2]: $N^k$
+- Multi-step experiments: Whataburger
+- Factorial designs
+- Combinations and permutations
+
+## Whataburger
+
+**Texas Fast Food Chain says there are 36,864 to order a Whataburger.  How?**
+- 2 burger patties (Regular, Junior) up to triple meat (R,J,RJ,RR,JJ,RRR,JJJ,RJJ,JRR)
+- 4 bread options
+- 3 condiments (mayonnaise, mustard, ketchup)
+- Vegetables (lettuce, tomato, pickle, onion)
+- Cheese, jalapeno, bacon
+$9*4*(1+3+3+1)*(1+4+6+4+1)*(1+3+3+1)$
+
+**Just like the t-shirts say, 36,864 ways to make a whataburger!**
+
+[citation](http://www.prnewswire.com/news-releases/36864-ways-to-customize-the-usual-whataburger-order-62055577.html)
+
+## Meetings
+
+**Six students wish to meet with a professor…**
+- Alice, Bob, Cat, Dharma, Ernest, Fred
+**How many arrangements of the meetings into six slots?**
+- Six ways for the first slot (ABCDEF)
+- Five ways for the second (whomever is not first)
+- Four ways for the third, and so on….
+
+$6*5*4*3*2*1=720$
+
+## Permuations and Combinations
+
+The key difference is whether or not the order matters.  Permutations deem order as relevant whereas combinations do not.  There are (at least as many or) more permutations than combinations.
+
+- Is the Powerball lottery a permutation or a combination?
+- What about a seating chart for this class?
+
+## Powerball
+
+- 59 white balls numbered 1 through 59
+- 35 red balls numbered 1 through 35
+- Choose 5 white balls and one red ball.
+
+
+[Link to page](https://www.oregonlottery.org/jackpot/powerball/)
+
+## Calculating (old) Powerball
+
+- Order doesn’t matter for the chooser, you choose six numbers (five white, one red)
+- Then just apply the formula for combinations (but we need to account for the 35 red balls).
+
+$$_nC_x = \frac{n!}{x!(n-x)!} = \frac{59!}{5!54!}$$
+
+So the chances of winning the lottery are just a combinations problem with a second-step.
+
+```{r}
+factorial(59)/(factorial(5)*factorial(54))*35
+```
+
+## Ground Truth
+
+![Image](img/Powerball.png)
+
+## New Powerball
+
+- Five white balls: 1 through 69
+- One red powerball: 1 through 26
+
+## Random Variables
+
+I do not love the book definition of this.  Technically, it is a variable whose values are generated according to some random process; your book implies that these are limited to quantities.  
+
+. . .
+
+**It is really a measurable function defined on a probability space that maps from the sample space [the set of possible outcomes] to the real numbers.**
+
+
+## A Core Idea: Independence
+
+What does it mean to say something **is independent** of something else?  
+
+- The simplest way to think about it is, "do I learn something more about x by knowing y than not".  If two things are independent, I don't need to care about y if x is my objective.
+
+## General Ideas
+
+- Expectation
+
+![Expectation](img/Exp.png)
+
+- Variance
+
+![Variance](img/Var.png)
+
+Part of 3.4 are incomplete.
+
+- **Covariance**
+- **Linear Functions of Random Variables**
+
+## Two Examples of Simpson's Paradox for Homework
+
+- Discrimination
+- Admissions
+
+## Introducing Esquisse
+
+![Esquisse](img/esquisse.png)
+
+## Executing
+
+`esquisse:::esquisser(viewer="browser")`
+
+**NB: It needs to run in a separate browser window.**
+
+## Selecting Data
+
+What is available in the environment?
+
+[A Run Through](./esquisse.html)
+
+
+# Setting the Context for GST 7
+
+Note the data of dissemination.
+
+# GST 6
+
+![Image](img/GST6.png)
+
+## A Model {background-image="img/Model.png" background-size="contain"}
+
+## Six Drivers and Five Core Contradictions {background-image="img/SixFive.png" background-size="contain"}
+
+## Impact and Uncertainty {background-image="img/ImpUnc.png" background-size="contain"}
+
+## Cross-Impacts {background-image="img/Mess.png" background-size="contain"}
+
+## Four Future Worlds {background-image="img/FutureWorlds.png" background-size="contain"}
+
+## Five Pathways {background-image="img/FivePathways.png" background-size="contain"}
+
+
+# Global Strategic Trends: Graphics
+
+# Splitting Up the World {background-image="img/HappyMap.png"}
+
+## Regions
+
+::: {.panel-tabset}
+
+## ESAS
+
+![MapESA](img/MapESAsia.png)
+
+
+## SEAS
+
+![MapSEA](img/MapSEAsia.png)
+
+
+## CAS
+
+![MapCA](img/MapCA.png)
+
+## SWAS
+
+![MapSWA](img/MapSWA.png)
+
+
+## AFR
+
+![MapAFR](img/MapAFR.png)
+
+## RUS
+
+![MapRUS](img/MapRUS.png)
+
+## EUR
+
+![PopEUR](img/MapEUR.png)
+
+
+## CAC
+
+![MapCAC](img/MapCAC.png)
+
+
+## NA
+
+![MapNA](img/MapNA.png)
+
+
+:::
+
+## Three Areas
+
+- Demographic Breakdown
+- Digital Usage
+- Climate, or ....
+
+
+## Demographics
+
+::: {.panel-tabset}
+
+## ESAS
+
+![PopESA](img/PopESAsia.png)
+
+
+## SEAS
+
+![PopSEA](img/PopSEAsia.png)
+
+
+## CAS
+
+![PopCA](img/PopCAsia.png)
+
+## SWAS
+
+![PopSWA](img/PopSWAsia.png)
+
+
+## AFR
+
+![PopAFR](img/PopAfrica.png)
+
+## RUS
+
+![PopRUS](img/PopRUS.png)
+
+## EUR
+
+![PopEUR](img/PopEUR.png)
+
+
+## CAC
+
+![PopCAC](img/PopCAC.png)
+
+
+## NA
+
+![PopNA](img/PopNA.png)
+
+
+:::
+
+## Digital
+
+::: {.panel-tabset}
+
+## ESAS
+
+![DigESA](img/DigitalESAsia.png)
+
+
+## SEAS
+
+![DigSEA](img/DigitalSEAsia.png)
+
+
+## CAS
+
+![DigCA](img/DigitalCAsia.png)
+
+## SWAS
+
+![DigSWA](img/DigitalSWAsia.png)
+
+
+## AFR
+
+![DigAFR](img/DigitalAfrica.png)
+
+## RUS
+
+![DigRUS](img/DigitalRUS.png)
+
+## EUR
+
+![DigEUR](img/DigitalEUR.png)
+
+
+## CAC
+
+![DigCAC](img/DigitalCAC.png)
+
+
+## NA
+
+![DigNA](img/DigitalNA.png)
+
+
+:::
+
+## Third Thing
+
+::: {.panel-tabset}
+
+## ESAS
+
+![ClimateESA](img/ClimateESAsia.png)
+
+
+## SEAS
+
+![ClimateSEA](img/ClimateSEAsia.png)
+
+
+## CAS
+
+![ClimateCA](img/ClimateCAsia.png)
+
+## SWAS
+
+![ClimateSWA](img/ClimateSWAsia.png)
+
+
+## AFR
+
+![EnerAFR](img/EnergyAfrica.png)
+
+## RUS
+
+![WheatRUS](img/FoodRUS.png)
+
+## EUR
+
+![MigEUR](img/MigrationEUR.png)
+
+
+## CAC
+
+![ClimCAC](img/ClimateCAC.png)
+
+
+## NA
+
+![DrugsNA](img/DrugsNA.png)
+
+
+:::
+
+# {background-image="img/SSpaces.png" background-size="contain"}
+
+1. Arctic
+2. Antarctica
+3. Oceans
+4. Space
+5. Cyberspace
+
+## The Arctic
+
+::: {.panel-tabset}
+
+## Claims
+
+![Claims](img/Claims.png)
+
+## Oil/Gas
+
+![Oil/Gas](img/OGas.png)
+
+## Ships
+
+![Ships](img/Ships.png)
+
+:::
+
+## Antarctica
+
+::: {.panel-tabset}
+
+## Claims
+
+![Claims](img/AntClaims.png)
+
+## Tourism
+
+![Tourism](img/Tourism.png)
+
+
+:::
+
+# The Oceans {background-image="img/OMap.png" background-size="contain"}
+
+## The Oceans 
+
+::: {.panel-tabset}
+
+## Level Rise
+
+![Levels](img/OClaims.png)
+
+## Undiscovered
+
+![Oil/Gas](img/OUndiscovered.png)
+
+## Exploration
+
+![Permits](img/OExplore.png)
+
+:::
+
+
+## Space/Orbits
+
+:::{.panel-tabset}
+
+## Map
+
+![Orbits](img/SpaceMap.png)
+
+## Companies
+
+![Companies](img/SpaceCos.png)
+
+
+## Satellites
+
+![Satellites](img/Sats.png)
+
+
+:::
+
+# Cyberspace {background-image="img/CSpace.png" background-size="contain"}
+
+## Cyberspace
+
+:::{.panel-tabset}
+
+## Usage
+
+![Usage](img/IUsage.png)
+
+## Companies
+
+![Information](img/InfoCreation.png)
+
+
+## Cyberwar
+
+![Incidents](img/CWar.png)
+
+
+:::
+
+
+# Themes {background-image="img/Themes.png" background-size="contain"}
+
++ Society
++ Economy
++ Environment
++ Information and Technology
++ Conflict and Security
+
+## Themes
+
+## Society
+
+:::{.panel-tabset}
+
+## Demography
+
+![Pop Dist](img/DemoF.png)
+
+## Urbanisation
+
+![Urbans](img/Urbans.png)
+
+
+## Religions
+
+![World Religions](img/WorldRel.png)
+
+
+:::
+
+## Economics
+
+:::{.panel-tabset}
+
+## GDPs/Companies
+
+![GDP/MC](img/GDPCos.png)
+
+## Employment
+
+![Employment](img/Jobs.png)
+
+
+:::
+
+# Environment and Ecology {background-image="img/EcoEnv.png" background-size="contain"}
+
+## Environmental Concerns
+
+:::{.panel-tabset}
+
+## Temperatures
+
+![Global Temps](img/GTemps.png)
+
+## Power
+
+![Energy](img/GEnergy.png)
+
+
+:::
+
+# {background-image="img/IandT.png" background-size="contain"}
+
+## Info Tech 
+
+:::{.panel-tabset}
+
+## Transport
+
+![Global Transport](img/TransMove.png)
+
+## Death
+
+![Causes](img/CoDeath.png)
+
+
+:::
+
+# Conflict and Security {background-image="img/ConfSec.png" background-size="contain"}
+
+image credit: page 419
+
+## Conflict and Security
+
+:::{.panel-tabset}
+
+## Military Expenditures
+
+![Regional Spend](img/MilExp.png)
+
+## Rare Earths
+
+![Minerals](img/RELocs.png)
+
+
+:::
+
+# The Page on Global Strategic Trends
+
+References are all in the report.
+
+[Link](https://assets.publishing.service.gov.uk/media/67dc3b740298101d2d671216/Global_Strategic_Trends_Out_to_2055_GOV.pdf)
