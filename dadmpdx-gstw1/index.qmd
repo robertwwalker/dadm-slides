@@ -26,6 +26,14 @@ library(dplyr)
 knitr::opts_chunk$set(fig.retina=3, fig.height=6, fig.width=9, echo=TRUE, eval=TRUE)
 ```
 
+# A Prompt for the Day
+
+[KGW](https://katu.com/news/local/portland-city-councilor-dan-ryan-exit-interviews-closing-businesses)
+
+What is the value of this?
+
+**Introducing causality....**
+
 # Some Probability
 
 ## Some Language
@@ -122,9 +130,6 @@ The key difference is whether or not the order matters.  Permutations deem order
 - 35 red balls numbered 1 through 35
 - Choose 5 white balls and one red ball.
 
-
-[Link to page](https://www.oregonlottery.org/jackpot/powerball/)
-
 ## Calculating (old) Powerball
 
 - Order doesn’t matter for the chooser, you choose six numbers (five white, one red)
@@ -146,6 +151,8 @@ factorial(59)/(factorial(5)*factorial(54))*35
 
 - Five white balls: 1 through 69
 - One red powerball: 1 through 26
+
+[Link to page](https://www.oregonlottery.org/jackpot/powerball/)
 
 ## Random Variables
 
