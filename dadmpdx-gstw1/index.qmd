@@ -34,6 +34,12 @@ What is the value of this?
 
 **Introducing causality....**
 
+## Augmented Analysis with Claude
+
+[A Chat](https://claude.ai/public/artifacts/2044fb75-4dc1-43bc-bfff-a285efbfeec1)
+
+![The Plot in Esquisse](img/esquisse-plotEUR.png)
+
 # Some Probability
 
 ## Some Language
